@@ -1,0 +1,21 @@
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+th {
+  background-color: beige;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  background-color: green;
+}
+
+td > button {
+  width: 100%;
+}
+
+table.all {
+  width: auto;
+}

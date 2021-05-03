@@ -1,0 +1,12 @@
+#page-container {
+  position: relative;
+  min-height: 100vh;
+  /*background-image: url("/assets/img/pexels-brett-jordan-825661.jpg");*/
+}
+
+main {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  background-color: lightgrey /*rgb(226, 193, 131)*/;
+  padding: 50px;
+}

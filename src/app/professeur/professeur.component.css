@@ -1,0 +1,25 @@
+li {
+  list-style: none;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+th {
+  background-color: beige;
+}
+
+table.all {
+  width: auto;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  background-color: green;
+}
+
+td > button {
+  width: 100%;
+}

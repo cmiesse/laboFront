@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/accueil">Accueil</a>
+          </li>
+          <li *ngIf="isLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/professeur">Professeur</a>
+          </li>
+          <li *ngIf="isLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/etudiant">Etudiant</a>
+          </li>
+          <li *ngIf="isLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/cours">Cours</a>
+          </li>
+          <li  *ngIf="isLogged()" class="nav-item">
+            <a class="nav-link" routerLink="/section">Section</a>
+          </li>
+          <button class="btn btn-danger" *ngIf="isLogged()" (click)="logout()">Déconnexion</button>
+        </ul>
+      </div>
+    </div>
+  </nav>

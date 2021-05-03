@@ -1,0 +1,21 @@
+
+<div *ngIf="isLogged()">
+    <h2>Accueil</h2>
+    <p>Vous êtes connecté</p>
+</div>
+
+<div *ngIf="!isLogged()"><h2>Formulaire de connexion</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    
+        <div>
+            <label for="">Pseudo</label><br>
+            <input type="text" formControlName="username" autocomplete="username">
+        </div>
+        <div>
+            <label for="">Mot de passe</label><br>
+            <input type="password" formControlName="password" autocomplete="current-password">
+        </div><br>
+        <button class="btn btn-success" type="submit">se connecter</button>
+    
+    </form></div>

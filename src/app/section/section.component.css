@@ -1,0 +1,22 @@
+.red {
+  color: red;
+}
+
+table.all {
+  width: auto;
+}
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+th {
+  background-color: beige;
+}
+.clickable:hover {
+  cursor: pointer;
+  background-color: green;
+}
+li {
+  list-style: none;
+}

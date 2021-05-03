@@ -1,0 +1,31 @@
+table.all {
+  width: auto;
+}
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+th {
+  background-color: beige;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  background-color: green;
+}
+li {
+  list-style: none;
+}
+.myFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
+td > button {
+  width: 100%;
+}
+
+tfoot > td {
+  border: none;
+}

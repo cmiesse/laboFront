@@ -1,0 +1,102 @@
+<h2>Section</h2>
+<div class="row">
+    <div class="col-6">
+        <h3>Liste des sections</h3>
+<table class="all">
+    <thead>
+        <th>section</th>
+        <th colspan="3">Actions</th>
+    </thead>
+    <tr *ngFor="let section of sectionList">
+        <td>{{section.id}} - {{section.name}}</td>
+        <td>
+                <button class="btn btn-primary" (click)="getSectionDetails(section)">Détails</button>      
+        </td>
+        <td>
+            <button  class="btn btn-warning">Modifier</button>
+        </td>
+        <td>
+            <button class="btn btn-danger" (click)="deleteSection(section)" >Supprimer</button>
+        </td>
+    </tr>
+</table>
+    </div>
+    <div class="col-6">
+        <h3>Formulaire d'ajout</h3>
+        <form [formGroup]="sectionForm" (ngSubmit)="postSection()">
+            <div>
+                <label for="id-input">id</label><br>
+                <input type="text" formControlName="id" id="id-input">
+            </div>
+            <div>
+                <label for="name-input">name</label><br>
+                <input type="text" formControlName="name" id="name-input">
+            </div>
+            <div>
+                <label for="delegate-input"></label>delegate<br>
+                <select id="delegate-input" formControlName="delegateId" id="delegate-input">
+                    <option value="-" selected disabled>-Choisissez un délégué -</option>
+                    <option *ngFor="let student of studentList" value={{student.id}}>{{student.firstname}} {{student.lastname}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="students-input">students</label><br>
+                <select id="students-input" formControlName="students" multiple id="students-input">
+                    <option value="-" selected disabled>-Choisissez un/des étudiant(s) -</option>
+                    <option *ngFor="let student of studentList" value={{student.id}}>{{student.firstname}} {{student.lastname}}</option>
+                </select>
+            </div><br>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</div>
+
+<div class="row" *ngIf="sectionDetails != null">
+    <h3>Détails de la section</h3>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>name</th>
+            <th>delegateId</th>
+            <th>students</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{sectionDetails.id}}</td>
+                <td>{{sectionDetails.name}}</td>
+                <td>{{sectionDetails.delegateId}}</td>
+                <td>
+                    <ul>
+                        <li [ngClass]="{'red':sectionDetails.delegateId == student.id}" title="Détails de l'étudiant" *ngFor="let student of sectionDetails.students" class="clickable" (click)="getStudentDetails(student)">{{student.firstname}} {{student.lastname}}</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row" *ngIf="sectionDetails != null && studentDetails != null">
+    <h3>Détails de l'étudiant de la section</h3>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>birthdate</th>
+            <th>login</th>
+            <th>section</th>
+            <th>result</th>
+            <th>course</th>
+        </thead>
+        <tbody>
+            <td>{{studentDetails.id}}</td>
+            <td>{{studentDetails.firstname}}</td>
+            <td>{{studentDetails.lastname}}</td>
+            <td>{{studentDetails.birthdate | date:'dd/MM/yyyy'}}</td>
+            <td>{{studentDetails.login}}</td>
+            <td>{{studentDetails.section.name}}</td>
+            <td>{{studentDetails.result}}</td>
+            <td>{{studentDetails.courseId}}</td>
+        </tbody>
+    </table>
+</div>
