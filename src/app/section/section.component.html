@@ -13,7 +13,7 @@
                 <button class="btn btn-primary" (click)="getSectionDetails(section)">Détails</button>      
         </td>
         <td>
-            <button  class="btn btn-warning">Modifier</button>
+            <button  class="btn btn-warning" (click)="getUpdateFormReady(section)">Modifier</button>
         </td>
         <td>
             <button class="btn btn-danger" (click)="deleteSection(section)" >Supprimer</button>
@@ -22,32 +22,57 @@
 </table>
     </div>
     <div class="col-6">
-        <h3>Formulaire d'ajout</h3>
+        <div id="addForm" *ngIf="!toggleAddUpdate">
+            <h3>Formulaire d'ajout</h3>
         <form [formGroup]="sectionForm" (ngSubmit)="postSection()">
             <div>
                 <label for="id-input">id</label><br>
                 <input type="text" formControlName="id" id="id-input">
             </div>
             <div>
-                <label for="name-input">name</label><br>
+                <label for="name-input">nom</label><br>
                 <input type="text" formControlName="name" id="name-input">
             </div>
             <div>
-                <label for="delegate-input"></label>delegate<br>
-                <select id="delegate-input" formControlName="delegateId" id="delegate-input">
+                <label for="delegate-input"></label>délégué<br>
+                <select formControlName="delegateId" id="delegate-input">
                     <option value="-" selected disabled>-Choisissez un délégué -</option>
                     <option *ngFor="let student of studentList" value={{student.id}}>{{student.firstname}} {{student.lastname}}</option>
                 </select>
             </div>
             <div>
-                <label for="students-input">students</label><br>
-                <select id="students-input" formControlName="students" multiple id="students-input">
+                <label for="students-input">étudiants</label><br>
+                <select formControlName="students" multiple id="students-input">
                     <option value="-" selected disabled>-Choisissez un/des étudiant(s) -</option>
                     <option *ngFor="let student of studentList" value={{student.id}}>{{student.firstname}} {{student.lastname}}</option>
                 </select>
             </div><br>
             <button type="submit">Envoyer</button>
         </form>
+        </div>
+        <div id="updateForm" *ngIf="toggleAddUpdate">
+            <h3>Formulaire de modification</h3>
+            <form [formGroup]="updateForm" (ngSubmit)="update()">
+                <div>
+                    <label for="idU-input">id</label><br>
+                    <input type="text" formControlName="id" id="idU-input" readonly>
+                </div>
+                <div>
+                    <label for="nameU-input">nom</label><br>
+                    <input type="text" formControlName="name" id="nameU-input">
+                </div>
+                <div>
+                    <label for="delegateU-input"></label>délégué<br>
+                    <select formControlName="delegateId" id="delegateU-input">
+                        <option value="-" selected disabled>-Choisissez un délégué -</option>
+                        <option *ngFor="let student of studentList" value={{student.id}}>{{student.firstname}} {{student.lastname}}</option>
+                    </select>
+                </div>
+                <br>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+        
     </div>
 </div>
 
@@ -56,9 +81,9 @@
     <table>
         <thead>
             <th>id</th>
-            <th>name</th>
-            <th>delegateId</th>
-            <th>students</th>
+            <th>nom</th>
+            <th>délégué</th>
+            <th>étudiants</th>
         </thead>
         <tbody>
             <tr>
@@ -80,13 +105,13 @@
     <table>
         <thead>
             <th>id</th>
-            <th>firstname</th>
-            <th>lastname</th>
-            <th>birthdate</th>
-            <th>login</th>
+            <th>prénom</th>
+            <th>nom</th>
+            <th>date de naissance</th>
+            <th>pseudo</th>
             <th>section</th>
-            <th>result</th>
-            <th>course</th>
+            <th>résultat</th>
+            <th>cours</th>
         </thead>
         <tbody>
             <td>{{studentDetails.id}}</td>

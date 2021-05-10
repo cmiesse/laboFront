@@ -19,3 +19,8 @@ td > button {
 table.all {
   width: auto;
 }
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}

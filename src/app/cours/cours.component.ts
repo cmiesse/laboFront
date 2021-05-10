@@ -13,17 +13,25 @@ import { ProfessorService } from '../services/professor.service';
 export class CoursComponent implements OnInit {
   coursList:Course[]=[];
   courseForm:FormGroup;
+  updateForm:FormGroup;
   professorList:Professor[]=[];
   profSelected : Professor;
   courseDetails:Course;
   profDetails:Professor;
+  toggleAddUpdate : boolean = false;
   constructor(builder:FormBuilder, private service:CourseService, private pService: ProfessorService) {
     this.courseForm = builder.group({
       "id":new FormControl(null, Validators.required),
       "name":new FormControl(null, Validators.required),
       "ects":new FormControl(null, Validators.required),
       "prof": new FormControl("-", Validators.required)
-    })
+    });
+    this.updateForm = builder.group({
+      "id":new FormControl(null, Validators.required),
+      "name":new FormControl(null, Validators.required),
+      "ects":new FormControl(null, Validators.required),
+      "prof": new FormControl("-", Validators.required)
+    });
    }
 
   ngOnInit(): void {
@@ -80,6 +88,33 @@ export class CoursComponent implements OnInit {
     }, this.service.postCourse(courseToAdd).subscribe((value)=>{this.coursList.push(value), this.getAllCourses()})
     });
   }       
+  }
+
+  getUpdateFormReady(course:Course){
+    this.updateForm.setValue({
+      id:course.id,
+      name:course.name,
+      ects:course.ects,
+      prof:course.prof.id
+    });
+    console.log(this.updateForm.value);
+    this.toggleAdder();
+  }
+
+  update(){
+    if(this.updateForm.valid){
+      var courseToUpdate = {
+        id:this.updateForm.value.id,
+        name:this.updateForm.value.name,
+        ects:this.updateForm.value.ects,
+        prof: this.profSelected
+      }
+      this.service.updateCourse(courseToUpdate.id,courseToUpdate).subscribe((response)=>{console.log("Modification effectuée"), this.getAllCourses(),this.toggleAdder()});
+    }
+  }
+
+  toggleAdder(){
+    this.toggleAddUpdate = !this.toggleAddUpdate;
   }
 
   deleteCourse(course:Course){

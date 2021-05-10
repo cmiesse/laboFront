@@ -15,10 +15,18 @@ export class SectionComponent implements OnInit {
   studentList:Student[]=[];
   selectedStudents:Student[]=[];
   sectionForm: FormGroup;
+  updateForm:FormGroup;
   sectionDetails:Section;
   studentDetails:Student;
+  toggleAddUpdate:boolean=false;
   constructor(builder: FormBuilder,private service:SectionService, private sService:StudentService) {
     this.sectionForm = builder.group({
+      "id":new FormControl(null, Validators.required),
+      "name":new FormControl(null, Validators.required),
+      "delegateId":new FormControl(null, Validators.required),
+      "students":new FormControl([],Validators.required)
+    });
+    this.updateForm = builder.group({
       "id":new FormControl(null, Validators.required),
       "name":new FormControl(null, Validators.required),
       "delegateId":new FormControl(null, Validators.required),
@@ -58,6 +66,32 @@ export class SectionComponent implements OnInit {
         (error)=>console.log(error))},500) ;
       
     }
+  }
+
+  getUpdateFormReady(section:Section){
+    this.updateForm.setValue({
+      id:section.id,
+      name:section.name,
+      delegateId:section.delegateId,
+      students:[]
+    });
+    this.toggleAdder();
+  }
+
+  update(){
+    if(this.updateForm.valid){
+      var sectionToUpdate = {
+        id:this.updateForm.value.id,
+        name:this.updateForm.value.name,
+        delegateId:this.updateForm.value.delegateId,
+        students: []
+      }
+      this.service.updateSection(sectionToUpdate.id,sectionToUpdate).subscribe((response)=>{console.log("Modification effectuée"), this.getAllSections(),this.toggleAdder()});
+    }
+  }
+
+  toggleAdder(){
+    this.toggleAddUpdate = !this.toggleAddUpdate;
   }
 
   getSectionDetails(section:Section){

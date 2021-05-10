@@ -1,12 +1,14 @@
 #page-container {
   position: relative;
   min-height: 100vh;
-  /*background-image: url("/assets/img/pexels-brett-jordan-825661.jpg");*/
+  background: no-repeat center url("/assets/img/classe2.png");
+  background-attachment: initial;
+  background-size: cover;
 }
 
 main {
-  margin-top: 50px;
-  margin-bottom: 30px;
-  background-color: lightgrey /*rgb(226, 193, 131)*/;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  background-color: rgba(211, 211, 211, 0.9);
   padding: 50px;
 }

@@ -35,6 +35,14 @@ export class StudentService {
     }) as Observable<Student>;
   }
 
+  updateStudent(id:number,student:Student):Observable<Student>{
+    return this.client.put(this.API_URL+"/"+id,student, {
+      headers:{
+        'Authorization': this.service.getUserInfo().auth
+      }
+    }) as Observable<Student>;
+  }
+
   deleteStudent(id:number):Observable<Student>{
     return this.client.delete(this.API_URL+"/"+id+"/delete", {
       headers:{

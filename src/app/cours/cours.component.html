@@ -14,7 +14,7 @@
                             <button class="btn btn-primary" (click)="getCourseDetails(cours)">Détails</button>      
                     </td>
                     <td>
-                        <button  class="btn btn-warning">Modifier</button>
+                        <button  class="btn btn-warning" (click)="getUpdateFormReady(cours)">Modifier</button>
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="deleteCourse(cours)" >Supprimer</button>
@@ -25,32 +25,59 @@
         </table>
 
     </div>
-
-    <div id="course-adder" class="col-4">
-        <h3>Formulaire d'ajout</h3>
-        <form [formGroup]="courseForm" (ngSubmit)="postCourse()">
-            <div>
-                <label for="id-input">id</label><br>
-                <input type="text" formControlName="id" id="id-input">
-            </div>
-            <div>
-                <label for="name-input">name</label><br>
-                <input type="text" formControlName="name" id="name-input">
-            </div>
-            <div>
-                <label for="ects-input">ects</label><br>
-                <input type="number" formControlName="ects" id="ects-input">
-            </div>
-            <div>
-                <label for="prof-input">prof</label><br>
-                <select formControlName="prof" id="prof-input" >
-                    <option value="-" selected disabled>Choisissez un prof</option>
-                    <option value={{pr.id}} *ngFor="let pr of professorList">{{pr.name}} {{pr.surname}}</option>
-                </select>
-            </div><br>
-            <button type="submit">Envoyer</button>
-        </form>
+    <div class="col-4">
+        <div id="course-adder" *ngIf="!toggleAddUpdate">
+            <h3>Formulaire d'ajout</h3>
+            <form [formGroup]="courseForm" (ngSubmit)="postCourse()">
+                <div>
+                    <label for="id-input">id</label><br>
+                    <input type="text" formControlName="id" id="id-input">
+                </div>
+                <div>
+                    <label for="name-input">nom</label><br>
+                    <input type="text" formControlName="name" id="name-input">
+                </div>
+                <div>
+                    <label for="ects-input">ects</label><br>
+                    <input type="number" formControlName="ects" id="ects-input">
+                </div>
+                <div>
+                    <label for="prof-input">professeur</label><br>
+                    <select formControlName="prof" id="prof-input" >
+                        <option value="-" selected disabled>Choisissez un prof</option>
+                        <option value={{pr.id}} *ngFor="let pr of professorList">{{pr.name}} {{pr.surname}}</option>
+                    </select>
+                </div><br>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+        <div id="updateForm" *ngIf="toggleAddUpdate">
+            <h3>Formulaire de modification</h3>
+            <form [formGroup]="updateForm" (ngSubmit)="update()">
+                <div>
+                    <label for="idU-input">id</label><br>
+                    <input type="text" formControlName="id" id="idU-input" readonly>
+                </div>
+                <div>
+                    <label for="nameU-input">nom</label><br>
+                    <input type="text" formControlName="name" id="nameU-input">
+                </div>
+                <div>
+                    <label for="ectsU-input">ects</label><br>
+                    <input type="number" formControlName="ects" id="ectsU-input">
+                </div>
+                <div>
+                    <label for="profU-input">professeur</label><br>
+                    <select formControlName="prof" id="profU-input">
+                        <option value="-" selected disabled>Choisissez un prof</option>
+                        <option value={{pr.id}} *ngFor="let pr of professorList">{{pr.surname}} {{pr.name}}</option>
+                    </select>
+                </div><br>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
     </div>
+    
 </div>
 
 <div class="row" *ngIf="courseDetails !=null">
@@ -58,9 +85,9 @@
     <table>
         <thead>
             <th>id</th>
-            <th>name</th>
+            <th>nom</th>
             <th>ects</th>
-            <th>prof</th>
+            <th>professeur</th>
         </thead>
         <tbody>
             <tr>
@@ -78,12 +105,12 @@
     <table>
         <thead>
             <th>id</th>
-            <th>name</th>
-            <th>surname</th>
-            <th>office</th>
+            <th>nom</th>
+            <th>prénom</th>
+            <th>bureau</th>
             <th>email</th>
-            <th>hireDate</th>
-            <th>wage</th>
+            <th>date d'embauche</th>
+            <th>salaire</th>
             <th>section</th>
             <th>cours</th>
         </thead>

@@ -2,6 +2,26 @@
 <div *ngIf="isLogged()">
     <h2>Accueil</h2>
     <p>Vous êtes connecté</p>
+    <div id="zones">
+        <div id="prof" routerLink="/professeur">
+            <h3>Zone Professeur</h3>
+            <p>Découvrez nos professeurs</p>
+        </div>
+        <div id="etudiant" routerLink="/etudiant">
+            <h3>Zone Étudiant</h3>
+            <p>Découvrez nos étudiants</p>
+        </div>
+        <div id="cours" routerLink="/cours">
+            <h3>Zone Cours</h3>
+            <p>Découvrez les différents cours proposés</p>
+        </div>
+        <div id="section" routerLink="/section">
+            <h3>Zone Section</h3>
+            <p>Découvrez les sections de l'établissements</p>
+        </div>
+    </div>
+    
+
 </div>
 
 <div *ngIf="!isLogged()"><h2>Formulaire de connexion</h2>

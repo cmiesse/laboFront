@@ -35,6 +35,14 @@ export class CourseService {
     }) as Observable<Course>
   }
 
+  updateCourse(id:string,course:Course){
+    return this.client.put(this.API_URL+"/"+id,course,{
+      headers:{
+        'Authorization': this.service.getUserInfo().auth
+      }
+    }) as  Observable<Course>;
+  }
+
   deleteCourse(id:string):Observable<Course>{
     return this.client.delete(this.API_URL+"/"+id+"/delete", {
       headers:{

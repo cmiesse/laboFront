@@ -1,4 +1,4 @@
-<h2>Etudiant</h2>
+<h2>Étudiant</h2>
 <div class="row">
     <div class="col-5">
         <h3>Liste des étudiants</h3>
@@ -7,39 +7,47 @@
         <th>étudiant</th>
         <th colspan="3">Actions</th>
     </thead>
-    <tr *ngFor="let student of studentList">
+    <tr *ngFor="let student of displayedStudents">
         <td>{{student.firstname}} {{student.lastname}}</td>
         <td>
                 <button class="btn btn-primary" (click)="getStudentDetails(student)">Détails</button>      
         </td>
         <td>
-            <button  class="btn btn-warning">Modifier</button>
+            <button  class="btn btn-warning" (click)="getUpdateFormReady(student)">Modifier</button>
         </td>
         <td>
             <button class="btn btn-danger" (click)="deleteStudent(student)" >Supprimer</button>
         </td>
     </tr>
-    
+    <tfoot>
+        <td colspan="4">    <div class="myButtons">
+            <button id="previous" (click)="getDisplayedStudents(-1)" [disabled]="studentList[0].id==displayedStudents[0].id">Précédent</button>
+            <p>Page {{end/10}}</p>
+            <button id="next" (click)="getDisplayedStudents(1)" [disabled]="studentList[studentList.length-1].id==displayedStudents[displayedStudents.length-1].id">Suivant</button>
+        </div></td>
+    </tfoot>
 </table>
+
 
     </div>
     <div class="col-7">
-        <h3>Formulaire d'ajout</h3>
+        <div id="addForm" *ngIf="!toggleAddUpdate">
+            <h3>Formulaire d'ajout</h3>
         <form [formGroup]="studentForm" (ngSubmit)="postStudent()">
             <div>
-                <label for="firstname-input">firstname</label><br>
+                <label for="firstname-input">prénom</label><br>
                 <input type="text" id="firstname-input" formControlName="firstname" >
             </div>
             <div>
-                <label for="lastname-input">lastname</label><br>
+                <label for="lastname-input">nom</label><br>
                 <input type="text" id="lastname-input" formControlName="lastname">
             </div>
             <div>
-                <label for="birthdate-input">birthdate</label><br>
+                <label for="birthdate-input">date de naissance</label><br>
                 <input type="date" id="birthdate-input" formControlName="birthdate">
             </div>
             <div>
-                <label for="login-input">login</label><br>
+                <label for="login-input">pseudo</label><br>
                 <input type="text" id="login-input" formControlName="login">
             </div>
             <div>
@@ -50,11 +58,11 @@
                 </select>
             </div>
             <div>
-                <label for="result-input">result</label><br>
+                <label for="result-input">résultat</label><br>
                 <input type="number" min="0" max="20" id="result-input" formControlName="result">
             </div>
             <div>
-                <label for="course-input">course</label><br>
+                <label for="course-input">cours</label><br>
                 <select id="course-input" formControlName="courseId">
                     <option value="-" selected disabled>Choisissez un cours</option>
                     <option *ngFor="let course of courseList" value={{course.id}} >{{course.name}}</option>
@@ -62,6 +70,48 @@
             </div><br>
             <button type="submit">Envoyer</button>
         </form>
+        </div>
+        <div id="updateForm" *ngIf="toggleAddUpdate">
+            <h3>Formulaire de modification</h3>
+        <form [formGroup]="updateForm" (ngSubmit)="update()">
+            <div>
+                <label for="firstnameU-input">prénom</label><br>
+                <input type="text" id="firstnameU-input" formControlName="firstname" >
+            </div>
+            <div>
+                <label for="lastnameU-input">nom</label><br>
+                <input type="text" id="lastnameU-input" formControlName="lastname">
+            </div>
+            <div>
+                <label for="birthdateU-input">date de naissance</label><br>
+                <input type="date" id="birthdateU-input" formControlName="birthdate">
+            </div>
+            <div>
+                <label for="loginU-input">pseudo</label><br>
+                <input type="text" id="loginU-input" formControlName="login">
+            </div>
+            <div>
+                <label for="sectionU-input">section</label><br>
+                <select id="sectionU-input" formControlName="section">
+                    <option value="-" selected disabled>Choisissez une section</option>
+                    <option *ngFor="let section of sectionList" value={{section.id}} >{{section.name}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="resultU-input">résultat</label><br>
+                <input type="number" min="0" max="20" id="resultU-input" formControlName="result">
+            </div>
+            <div>
+                <label for="courseU-input">cours</label><br>
+                <select id="courseU-input" formControlName="courseId">
+                    <option value="-" selected disabled>Choisissez un cours</option>
+                    <option *ngFor="let course of courseList" value={{course.id}} >{{course.name}}</option>
+                </select>
+            </div><br>
+            <button type="submit">Envoyer</button>
+        </form>
+        </div>
+        
     </div>
 </div>
 <div class="row" *ngIf="studentDetails !=null">
@@ -69,13 +119,13 @@
     <table>
         <thead>
             <th>id</th>
-            <th>firstname</th>
-            <th>lastname</th>
-            <th>birthdate</th>
-            <th>login</th>
+            <th>prénom</th>
+            <th>nom</th>
+            <th>date de naissance</th>
+            <th>pseudo</th>
             <th>section</th>
-            <th>result</th>
-            <th>course</th>
+            <th>résultat</th>
+            <th>cours</th>
         </thead>
         <tbody>
             <td>{{studentDetails.id}}</td>
@@ -93,10 +143,10 @@
     <h3>Détails de la section de l'étudiant</h3>
     <table>
         <thead>
-            <td>id</td>
-            <td>name</td>
-            <td>delegateId</td>
-            <td>students</td>
+            <th>id</th>
+            <th>nom</th>
+            <th>délégué</th>
+            <th>étudiants</th>
         </thead>
         <tbody>
             <tr>
@@ -114,10 +164,10 @@
     <h3>Détails du cours de l'étudiant</h3>
     <table>
         <thead>
-            <td>id</td>
-            <td>name</td>
-            <td>ects</td>
-            <td>prof</td>
+            <th>id</th>
+            <th>nom</th>
+            <th>ects</th>
+            <th>professeur</th>
         </thead>
         <tbody>
             <tr>

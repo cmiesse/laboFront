@@ -1,0 +1,27 @@
+/*
+#zones > div:nth-child(2n) {
+  text-align: right;
+}
+*/
+
+#zones > div {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+#prof {
+  background-color: lightblue;
+}
+
+#etudiant {
+  background-color: lightgoldenrodyellow;
+}
+
+#cours {
+  background-color: lightgreen;
+}
+
+#section {
+  background-color: lightsalmon;
+}

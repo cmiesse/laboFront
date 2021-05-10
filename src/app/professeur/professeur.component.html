@@ -31,15 +31,15 @@
             <div class="row">
                 <div class="col-4">
                     <div>
-                        <label for="name-input">name</label><br>
+                        <label for="name-input">nom</label><br>
                         <input type="text" formControlName="name" id="name-input">
                     </div>
                     <div>
-                        <label for="surname-input">surname</label><br>
+                        <label for="surname-input">prénom</label><br>
                         <input type="text" formControlName="surname" id="surname-input">
                     </div>
                     <div>
-                        <label for="office-input">office</label><br>
+                        <label for="office-input">bureau</label><br>
                         <input type="number" formControlName="office" id="office-input">
                     </div>
                     <div>
@@ -47,14 +47,14 @@
                         <input type="email" formControlName="email" id="email-input">
                     </div>
                     <div>
-                        <label for="hireDate-input">hireDate</label><br>
+                        <label for="hireDate-input">date d'embauche</label><br>
                         <input type="date" formControlName="hireDate" id="hireDate-input">
                     </div>
                 </div>
                 <div class="col-8">
                     
                     <div>
-                        <label for="wage-input">wage</label><br>
+                        <label for="wage-input">salaire</label><br>
                         <input type="number" formControlName="wage" id="wage-input">
                     </div>
                     <div>
@@ -72,7 +72,7 @@
                         </select>
                     </div>-->
                     <br>
-                <button type="submit">envoyer</button>
+                <button type="submit">Envoyer</button>
                 </div>
             </div>
             
@@ -85,15 +85,15 @@
                 <div class="row">
                     <div class="col-4">
                         <div>
-                            <label for="nameU-input">name</label><br>
+                            <label for="nameU-input">nom</label><br>
                             <input type="text" formControlName="name" id="nameU-input">
                         </div>
                         <div>
-                            <label for="surnameU-input">surname</label><br>
+                            <label for="surnameU-input">prénom</label><br>
                             <input type="text" formControlName="surname" id="surnameU-input">
                         </div>
                         <div>
-                            <label for="officeU-input">office</label><br>
+                            <label for="officeU-input">bureau</label><br>
                             <input type="number" formControlName="office" id="officeU-input">
                         </div>
                         <div>
@@ -101,14 +101,14 @@
                             <input type="email" formControlName="email" id="emailU-input">
                         </div>
                         <div>
-                            <label for="hireDateU-input">hireDate</label><br>
+                            <label for="hireDateU-input">date d'embauche</label><br>
                             <input type="date" formControlName="hireDate" id="hireDateU-input">
                         </div>
                     </div>
                     <div class="col-8">
                         
                         <div>
-                            <label for="wageU-input">wage</label><br>
+                            <label for="wageU-input">salaire</label><br>
                             <input type="number" formControlName="wage" id="wageU-input">
                         </div>
                         <div>
@@ -126,7 +126,7 @@
                             </select>
                         </div>-->
                         <br>
-                    <button type="submit">envoyer</button>
+                    <button type="submit">Envoyer</button>
                     </div>
                 </div>
                 
@@ -141,12 +141,12 @@
     <table>
         <thead>
            <th>id</th>
-           <th>name</th>
-           <th>surname</th>
-            <th>office</th>
+           <th>nom</th>
+           <th>prénom</th>
+            <th>bureau</th>
             <th>email</th>
-            <th>hireDate</th>
-            <th>wage</th>
+            <th>date d'embauche</th>
+            <th>salaire</th>
             <th>section</th>
             <th>cours</th>
            
@@ -176,11 +176,9 @@
     <table>
         <thead>
             <th>id</th>
-            <th>name</th>
-            <th>delegateId</th>
-            <th>students</th>
-            
-           
+            <th>nom</th>
+            <th>délégué</th>
+            <th>étudiants</th>
         </thead>
         <tr >
             <td>{{detailsSection.id}}</td>
@@ -201,9 +199,9 @@
     <table>
         <thead>
             <th>id</th>
-            <th>name</th>
+            <th>nom</th>
             <th>ects</th>
-            <th>professor</th>
+            <th>professeur</th>
             
         </thead>
         <tr>

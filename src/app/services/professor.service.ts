@@ -36,7 +36,7 @@ export class ProfessorService {
   }
 
   updateProf(prof:Professor, id:number){
-    return this.client.patch(this.API_URL+"/"+id,prof,{
+    return this.client.put(this.API_URL+"/"+id,prof,{
       headers:{
         'Authorization': this.service.getUserInfo().auth
       }

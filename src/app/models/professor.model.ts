@@ -7,7 +7,7 @@ export interface Professor{
     surname:string,
     office:number,
     email:string,
-    hireDate:Date,
+    hireDate:string,
     wage:number,
     section:Section,
     cours:Course[]

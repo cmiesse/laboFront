@@ -35,6 +35,14 @@ export class SectionService {
     }) as Observable<Section>
   }
 
+  updateSection(id:number, section:Section):Observable<Section>{
+    return this.client.put(this.API_URL+"/"+id,section,{
+      headers:{
+        'Authorization': this.service.getUserInfo().auth
+      }
+    }) as Observable<Section>
+  }
+
   deleteSection(id:number):Observable<Section>{
     return this.client.delete(this.API_URL+"/"+id+"/delete", {
       headers:{
